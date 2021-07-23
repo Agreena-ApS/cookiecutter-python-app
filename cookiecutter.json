@@ -1,7 +1,7 @@
 {
     "project_name": null,
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
-    "app_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
+    "app_name": "{{ cookiecutter.project_slug.strip('service').strip('hb').lstrip('-').rstrip('-').replace('-', '_') }}",
     "project_short_description": "Please add a short description of the Python app...",
     "docker_enabled": "y",
     "circle_ci_enabled": "y",
