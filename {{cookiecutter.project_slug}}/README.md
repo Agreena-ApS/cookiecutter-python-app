@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-{{cookicutter.project_short_description}}
+{{cookiecutter.project_short_description}}
 
 
 ## Development
