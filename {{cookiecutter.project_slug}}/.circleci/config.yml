@@ -40,7 +40,7 @@ jobs:
       - run: docker run --name app --entrypoint "pip3" $IMAGE_NAME install -r requirements/development.txt
       - run: docker commit app app
       - run: docker run --entrypoint "black" app --line-length=100 --check .
-      - run: docker run --entrypoint "pylint" app {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc
+      - {% if cookiecutter.code_qa == 'pylint' %}run: docker run --entrypoint "pylint" app {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc{% elif cookiecutter.code_qa == 'flake8' %}run: docker run --entrypoint "flake8" app {{cookiecutter.app_name}}/ tests/{%- endif %}
       - run: docker run --entrypoint "mypy" app {{cookiecutter.app_name}}/
       - run: docker run --entrypoint "pytest" app tests --verbose
       - store_test_results:
