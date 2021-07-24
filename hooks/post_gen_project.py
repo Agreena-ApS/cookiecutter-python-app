@@ -12,13 +12,15 @@ class Settings:
     linters: List[str] = field(init=False, default_factory=list)
 
     def __post_init__(self):
-        self.linters_config = {
+        linters_config = {
             "pylint": ".pylintrc",
             "flake8": ".flake8",
         }
         # Delete the configuration selected by the user, which is the one that
         # must be preserved.
-        del self.linters_config[self.code_qa]
+        self.linters = [
+            config for linter, config in linters_config.items() if linter != self.code_qa
+        ]
 
 
 def check_docker(settings: Settings) -> None:
@@ -45,7 +47,7 @@ def check_code_qa(settings: Settings) -> None:
     `code_qa` will leave in the root directory a configuration file for the
     selected linter tool.
     """
-    for _, config_file in settings.linters_config.items():
+    for config_file in settings.linters:
         os.remove(os.path.join(os.getcwd(), config_file))
 
 
