@@ -1,6 +1,6 @@
-from {{cookiecutter.app_name}}.core.config.settings import get_settings
+{% if cookiecutter.settings_management == 'y' %}from {{cookiecutter.app_name}}.core.config.settings import get_settings
 
-
+{% endif -%}
 logging_config = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -20,7 +20,7 @@ logging_config = {
         "{{cookiecutter.app_name}}": {
             "handlers": ["console"],
             "propagate": False,
-            "level": "DEBUG" if get_settings().debug is True else "INFO",
+            "level": {% if cookiecutter.settings_management == 'y' %}"DEBUG" if get_settings().debug is True else "INFO"{% else %}"INFO"{% endif %},
         },
     },
 }
