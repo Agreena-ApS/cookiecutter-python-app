@@ -18,8 +18,8 @@ class Settings:
             "pylint": ".pylintrc",
             "flake8": ".flake8",
         }
-        # Delete the configuration selected by the user, which is the one that
-        # must be preserved.
+
+        # Select for deletion those configs NOT selected by the user.
         self.linters = [
             config for linter, config in linters_config.items() if linter != self.code_qa
         ]
