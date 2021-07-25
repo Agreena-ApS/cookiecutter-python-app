@@ -29,12 +29,14 @@ def check_settings(settings: Settings) -> None:
     """
     Opting to not have settings management in the Python app will dismiss the
     creation of a `core/config/settings.py` module using Pydantic to validate
-    and load project settings.
+    and load project settings. Also, the default `conftest.py` module with a
+    fixture to override settings during tests will not be added to project.
     """
     if settings.settings_management is False:
         os.remove(
             os.path.join(os.getcwd(), '{{cookiecutter.app_name}}', 'core', 'config', 'settings.py')
         )
+        os.remove(os.path.join(os.getcwd(), 'tests', 'conftest.py'))
 
 
 def check_logging(settings: Settings) -> None:
