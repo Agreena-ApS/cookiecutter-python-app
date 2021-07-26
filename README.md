@@ -24,8 +24,8 @@ for the project, by default:
 
 - A `main.py` module that could serve as an entrypoint for your app, or also
   otherwise as a quick, easy to substitute example. It uses [Typer](https://typer.tiangolo.com/)
-  as a CLI library, in a hope to make easier for the developer to handle
-  arguments and output messages.
+  as a CLI library, hoping it makes easier for the developer to handle arguments 
+  and output messages.
 - Minimum app layout including by default a project settings management class
   based on [Pydantic](https://pydantic-docs.helpmanual.io/) and a basic Python
   logging configuration dictionary.
@@ -54,9 +54,8 @@ default in the Cookiecutter project generation dialog.
 
 ### Requirements
 
-The only requirements to use this templates is to have Python 3 installed, which
-you probably have already, and Cookiecutter tool. You can install Cookiecutter
-with `pip`:
+The only requirements to use this template is to have Python 3 installed and
+Cookiecutter tool. You can install Cookiecutter with `pip`:
 
 ```bash
 pip install cookiecutter
@@ -64,11 +63,11 @@ pip install cookiecutter
 
 ### Generating a new Python project
 
-Simply run this command in shell to generate a new Python project in your
+Simply run this command in the terminal to generate a new Python project in your
 current working directory:
 
 ```bash
-cookiecutter git+ssh://git@github.com/HummingbirdTechGroup/cookiecutter-python-app.git
+cookiecutter gh:HummingbirdTechGroup/cookiecutter-python-app
 ```
 
 Follow the dialog questions to select your preferred choices and project root
