@@ -1,6 +1,7 @@
-{% if cookiecutter.logging_config == 'y' %}import logging.config{% endif -%}
-import typer
-{%- if cookiecutter.logging_config == 'y' %}
+{% if cookiecutter.logging_config == 'y' -%}import logging.config
+{% endif %}
+import typer{% if cookiecutter.logging_config == 'y' %}
+
 from {{cookiecutter.app_name}}.core.config.logging import logging_config{% endif %}
 
 
