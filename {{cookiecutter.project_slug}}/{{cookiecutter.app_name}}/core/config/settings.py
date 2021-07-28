@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import BaseSettings, Field, HttpUrl
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
