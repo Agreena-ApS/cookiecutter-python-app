@@ -1,4 +1,4 @@
-from functools import cache
+from functools import lru_cache
 
 from pydantic import BaseSettings, Field, HttpUrl
 
@@ -13,6 +13,6 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
 
-@cache
+@lru_cache(maxsize=1)
 def get_settings():
     return Settings()
