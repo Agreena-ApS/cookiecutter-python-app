@@ -99,7 +99,15 @@ is a reference of them:
   bootstrap. Defaults to `y`.
 - **`docker_enabled`**: Wheter a basic Dockerfile to create a container image
   for the project should be generated (`y`) or not (`n`). Defaults to `y`.
-- **`circle_ci_enabled`**: Wheter a Circle CI YAML configuration file should be
-  generated (`y`) or not (`n`). Defaults to `y`.
+- **`circle_ci_config`**: Wheter a Circle CI YAML configuration file should be
+  generated or not, and what workflow should have. There are 3 options here:
+  1. `trunk`: Generate CircleCI configuration, with "trunk branch" development
+  mode. Your Git PRs are merged into `develop` branch and then deployed to
+  Staging environment. When everything is fine, will be merged to `main` branch
+  and deployed to Production from there in a new release.
+  2. `CI-CD`: Generate CircleCI configuration, with full CI/CD development. Your
+  Git PRs are merged directly into `main` and both Staging and Production
+  deployments are done from there.
+  3. `none`: Don't generate CircleCI configuration at all.
 - **`code_qa`**: The code QA / linter tool to be used in the project. There are
   currently 2 choices: `pylint` and `flake8`. Defaults to `pylint`.

@@ -6,6 +6,6 @@
     "settings_management": "y",
     "logging_config": "y",
     "docker_enabled": "y",
-    "circle_ci_enabled": "y",
+    "circle_ci_config": ["trunk", "CI-CD", "none"],
     "code_qa": ["pylint", "flake8"]
 }

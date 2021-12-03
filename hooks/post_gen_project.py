@@ -9,7 +9,7 @@ class Settings:
     settings_management: bool
     logging_config: bool
     docker_enabled: bool
-    circle_ci_enabled: bool
+    circle_ci_config: str
     code_qa: str
     linters: List[str] = field(init=False, default_factory=list)
 
@@ -66,16 +66,17 @@ def check_docker(settings: Settings) -> None:
     will not make any effect in case Circle CI is enabled, as Docker image is
     needed in CI/CD workflow.
     """
-    if settings.docker_enabled is False and settings.circle_ci_enabled is not True:
+    if settings.docker_enabled is False and settings.circle_ci_config != "none":
         os.remove(os.path.join(os.getcwd(), 'Dockerfile'))
         os.remove(os.path.join(os.getcwd(), '.dockerignore'))
 
 
 def check_circleci(settings: Settings) -> None:
     """
-    Disabling `circle_ci_enabled` will dismiss `.circleci` configuration.
+    Setting `circle_ci_config` value to string 'none' will dismiss `.circleci`
+    configuration.
     """
-    if settings.circle_ci_enabled is False:
+    if settings.circle_ci_config == "none":
         shutil.rmtree(os.path.join(os.getcwd(), '.circleci'))
 
 
@@ -94,7 +95,7 @@ if __name__ == "__main__":
         settings_management='{{cookiecutter.settings_management}}' == 'y',
         logging_config='{{cookiecutter.logging_config}}' == 'y',
         docker_enabled='{{cookiecutter.docker_enabled}}' == 'y',
-        circle_ci_enabled='{{cookiecutter.circle_ci_enabled}}' == 'y',
+        circle_ci_config='{{cookiecutter.circle_ci_config}}',
         code_qa="{{cookiecutter.code_qa}}"
     )
 

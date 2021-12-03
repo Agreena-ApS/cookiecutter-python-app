@@ -81,7 +81,7 @@ workflows:
           requires:
             - build
 
-      # staging
+      # Staging
       - push-docker-image:
           name: push-docker-image-staging
           env: staging
@@ -91,9 +91,9 @@ workflows:
             - gcp-secrets
           filters:
             branches:
-              only: develop
+              only: {% if cookiecutter.circle_ci_config == "trunk" %}develop{% elif cookiecutter.circle_ci_config == "CI-CD" %}main{% endif %}
 
-      # prod
+      # Production
       - hold:
           type: approval
           requires:
