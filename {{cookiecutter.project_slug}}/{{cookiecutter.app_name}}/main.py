@@ -2,12 +2,12 @@
 {% endif %}
 import typer{% if cookiecutter.logging_config == 'y' %}
 
-from {{cookiecutter.app_name}}.core.config.logging import logging_config{% endif %}
+from {{cookiecutter.app_name}}.core.config.logging import get_logging_config{% endif %}
 
 
 def main():{% if cookiecutter.logging_config == 'y' %}
     # Configuring Python logging.
-    logging.config.dictConfig(logging_config)
+    logging.config.dictConfig(get_logging_config())
 {% endif %}
     typer.echo(
         typer.style(
