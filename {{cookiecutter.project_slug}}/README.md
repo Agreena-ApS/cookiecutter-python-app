@@ -66,7 +66,7 @@ export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/{{cookiecutter.project_slug}}
 
 ## Contributing
 
-Before starting to contribute to Analysis Data Transformation, please install `pre-commit` to make
+Before starting to contribute to {{cookiecutter.project_name}}, please install `pre-commit` to make
 sure your changes get checked for style and standards before committing them to repository:
 
     $ pre-commit install
