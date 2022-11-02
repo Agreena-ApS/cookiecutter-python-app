@@ -1,14 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM python:3.9-slim-buster
+FROM python:3.11-slim-bullseye
 
 WORKDIR /{{cookiecutter.app_name}}
 ENV PYTHONPATH="${PYTHONPATH}:{{cookiecutter.app_name}}"
 
 COPY requirements/*.txt ./requirements/
-
-RUN apt-get -y update && \
-    apt-get -y upgrade && \
-    apt-get install -y git libspatialindex-dev
 
 
 RUN mkdir /root/.ssh/
