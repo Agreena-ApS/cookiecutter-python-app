@@ -1,31 +1,30 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@1.4.0
+  python: circleci/python@2.1.1
 
 executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/services/{{cookiecutter.project_slug}}-service
+      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/services/{{cookiecutter.project_slug}}
     docker:
-      - image: circleci/buildpack-deps:buster
+      - image: cimg/python3.10
+    resource_class: small
 
 jobs:
   build:
     docker:
-      - image: cimg/python:3.9
+      - image: cimg/python:3.10
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.14
-      - run: docker build --ssh default --progress=plain -t $IMAGE_NAME:latest .
+      - run: docker build --progress=plain -t $IMAGE_NAME:latest .
       - run: docker save -o image.tar $IMAGE_NAME
       - persist_to_workspace:
           root: .
           paths:
             - image.tar
     environment:
-      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/services/{{cookiecutter.project_slug}}-service
+      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/services/{{cookiecutter.project_slug}}
       DOCKER_BUILDKIT: 1
       GIT_COMMIT: $CIRCLE_SHA1
 
