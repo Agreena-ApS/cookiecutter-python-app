@@ -1,5 +1,6 @@
 {% if cookiecutter.settings_management == 'y' %}from {{cookiecutter.app_name}}.core.config.settings import get_settings
 
+
 {% endif -%}
 def get_logging_config() -> dict:
     return {
