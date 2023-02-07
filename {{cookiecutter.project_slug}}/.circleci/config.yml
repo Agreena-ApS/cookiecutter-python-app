@@ -42,12 +42,15 @@ jobs:
       - run: docker load -i /tmp/workspace/image.tar
       - run: docker run --name {{cookiecutter.app_name}} --entrypoint "pip3" $IMAGE_NAME install -r requirements/development.txt
       - run: docker commit {{cookiecutter.app_name}} {{cookiecutter.app_name}}
-      - run: docker run --entrypoint "black" {{cookiecutter.app_name}} --line-length=100 --check .
+      - run: docker run --entrypoint "black" --line-length=100 --check .
       - {% if cookiecutter.code_qa == 'pylint' %}run: docker run --entrypoint "pylint" {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc{% elif cookiecutter.code_qa == 'flake8' %}run: docker run --entrypoint "flake8" {{cookiecutter.app_name}}/ tests/{%- endif %}
       - run: docker run --entrypoint "mypy" {{cookiecutter.app_name}}/
       - run: docker run --entrypoint "pytest" tests --verbose
       - store_test_results:
           path: results
+      - store_artifacts:
+          path: $HOME/test-results/coverage.html
+          destination: coverage-metrics
 
   push-docker-image:
     executor: docker-publisher
