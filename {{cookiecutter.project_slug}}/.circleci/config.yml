@@ -76,7 +76,7 @@ jobs:
           command: echo $GSA_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
           name: Log in to Google Container Registry
       - run:
-          command: docker push $IMAGE_NAME
+          command: docker push --all-tags $IMAGE_NAME
           name: Push image
 
 workflows:
