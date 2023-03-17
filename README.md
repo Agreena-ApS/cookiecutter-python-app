@@ -8,9 +8,9 @@ Basic template for Python applications at Agreena, using
 
 This is a template to quickly bootstrap Python application projects. The goal
 is to get the application base layout and configuration sorted out from the
-beginning, uniformizing the different Python based projects at Hummingbird
-so they look familiar to the engineers and become predictable for DevOps, saving
-time and making people's life (hopefully) easier.
+beginning, uniformizing the different Python based projects at Agreena so they 
+look familiar to the engineers and become predictable for DevOps, saving time 
+and making people's life (hopefully) easier.
 
 At the same time, this template pretends to be only a base point for the 
 application development, giving freedom to developers to decide about codebase 
@@ -42,7 +42,7 @@ for the project, by default:
 - `Dockerfile` specifying basic Docker image configuration for the project, as
   well as a `.dockerignore` file.
 - Circle CI pipeline configuration YAML file, ready to be added to the
-  [Hummingbird Circle CI dashboard](https://app.circleci.com/pipelines/github/HummingbirdTechGroup).
+  [Agreena-ApS Circle CI dashboard](https://app.circleci.com/pipelines/github/Agreena-ApS).
 
 All features are entirely optional, though all of them will be enabled by
 default in the Cookiecutter project generation dialog.
@@ -65,7 +65,7 @@ Simply run this command in the terminal to generate a new Python project in your
 current working directory:
 
 ```bash
-cookiecutter gh:HummingbirdTechGroup/cookiecutter-python-app
+cookiecutter gh:Agreena-ApS/cookiecutter-python-app
 ```
 
 Follow the dialog questions to select your preferred choices and project root
@@ -77,7 +77,7 @@ Cookiecutter will ask for a few very basic questions to set up the project. Here
 is a reference of them:
 
 - **`project_name`**: The real name of the project, to be seen in README's and
-  official documentation. E.g. something like "HB Image Analysis". This question
+  official documentation. E.g. something like "Image Analysis". This question
   is mandatory.
 - **`project_slug`**: A "slug" string to name the root project directory. This
   will automatically be set as a _slugified_ version of `project_name` if you
