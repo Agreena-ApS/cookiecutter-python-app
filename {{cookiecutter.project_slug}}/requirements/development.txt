@@ -4,8 +4,8 @@
 # In case you are going to update versions here, remember to also update them in
 # `.pre-commit-config.yaml` file to ensure you use the same checks everywhere.
 
-black==22.10.0
-mypy==0.982
-pre-commit==2.15.5
-{% if cookiecutter.code_qa == 'pylint' %}pylint==2.15.5{% elif cookiecutter.code_qa == 'flake8' %}flake8==5.0.4{% endif %}
-pytest==7.2.0
+black==23.1.0
+mypy==1.1.1
+pre-commit==3.1.1
+{% if cookiecutter.code_qa == 'pylint' %}pylint==2.17.0{% elif cookiecutter.code_qa == 'flake8' %}flake8==6.0.0{% endif %}
+pytest==7.2.2
