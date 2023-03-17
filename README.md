@@ -1,6 +1,6 @@
 # Cookiecutter Python App
 
-Basic template for Python applications at Hummingbird Technologies, using 
+Basic template for Python applications at Agreena, using 
 [Cookiecutter](https://github.com/cookiecutter/cookiecutter).
 
 
@@ -23,9 +23,7 @@ The generated Python app skeleton will have this features set up and configured
 for the project, by default:
 
 - A `main.py` module that could serve as an entrypoint for your app, or also
-  otherwise as a quick, easy to substitute example. It uses [Typer](https://typer.tiangolo.com/)
-  as a CLI library, hoping it makes easier for the developer to handle arguments 
-  and output messages.
+  otherwise as a quick, easy to substitute example.
 - Minimum app layout including by default a project settings management class
   based on [Pydantic](https://pydantic-docs.helpmanual.io/) and a basic Python
   logging configuration dictionary.
@@ -78,7 +76,7 @@ directory with base code layout will be created for you.
 Cookiecutter will ask for a few very basic questions to set up the project. Here
 is a reference of them:
 
-- **`project_name`**: The real name of the project, to be seen in Readme's and
+- **`project_name`**: The real name of the project, to be seen in README's and
   official documentation. E.g. something like "HB Image Analysis". This question
   is mandatory.
 - **`project_slug`**: A "slug" string to name the root project directory. This
