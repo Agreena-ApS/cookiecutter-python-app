@@ -4,6 +4,8 @@
 # In case you are going to update versions here, remember to also update them in
 # `.pre-commit-config.yaml` file to ensure you use the same checks everywhere.
 
+-r base.txt
+
 black==23.3.0
 mypy==1.3.0
 pre-commit==3.3.1
