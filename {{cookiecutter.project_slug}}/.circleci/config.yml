@@ -10,7 +10,7 @@ executors:
     docker:
       - image: cimg/python:3.10
     environment:
-      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/services/{{cookiecutter.project_slug}}
+      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/platform/{{cookiecutter.project_slug}}
     resource_class: small
 
   tests-runner:
