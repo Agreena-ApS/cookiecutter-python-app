@@ -24,14 +24,19 @@ for the project, by default:
 
 - A `main.py` module that could serve as an entrypoint for your app, or also
   otherwise as a quick, easy to substitute example.
+  An optional `setup.cfg` packaging metadata file and `pyproject.toml` build
+  specification. This allows the application to be installed as a Python 
+  package.
 - Minimum app layout including by default a project settings management class
   based on [Pydantic](https://pydantic-docs.helpmanual.io/) and a basic Python
   logging configuration dictionary.
 - A default [pytest](https://docs.pytest.org/en/latest/) `conftest.py` fixtures
   file that helps to override base settings, in case the user opted to have 
   them.
-- Basic [pip requirements files](https://pip.pypa.io/en/latest/user_guide/#requirements-files)
-  inside a `requirements` directory.
+  Basic [frozen pip requirements files](https://pip.pypa.io/en/latest/user_guide/#requirements-files)
+  inside a `requirements` directory. If a Python package is requested and the user
+  specifies requirements should be frozen, a method for generating these with 
+  [pip-tools](https://pip-tools.readthedocs.io/en/latest/) is also included.
 - Configuration for a Code QA / linter tool, which can be chosen by the 
   user. [Pylint](https://pylint.org/), [Flake8](https://flake8.pycqa.org/en/latest/),
   and [Ruff](https://beta.ruff.rs/docs/) are the ones currently supported.
@@ -93,15 +98,21 @@ is a reference of them:
   This sets up a `CODEOWNERS` file which sets the given team as the default 
   reviewers. They must be given relevant permissions over the repository.
   The team will be appended to `@Agreena-ApS/`.
-- **`settings_management`**: Wheter a Pydantic settings management class should
+- **`python_package`**: Whether to include Python packaging metadata files (`y`)
+  or not (`n`). This will allow the application to be installed as a Python 
+  package with `pip`. Defaults to `y`. 
+- **`settings_management`**: Whether a Pydantic settings management class should
   be generated (`y`) or not (`n`) as part of the Python codebase bootstrap.
   Defaults to `y`.
-- **`logging_config`**: Wheter a basic Python logging configuration dictionary
+- **`logging_config`**: Whether a basic Python logging configuration dictionary
   should be generated (`y`) or not (`n`) as part of the Python codebase 
   bootstrap. Defaults to `y`.
-- **`docker_enabled`**: Wheter a basic Dockerfile to create a container image
+- **`docker_enabled`**: Whether a basic Dockerfile to create a container image
   for the project should be generated (`y`) or not (`n`). Defaults to `y`.
-- **`circle_ci_config`**: Wheter a Circle CI YAML configuration file should be
+- **`freeze_requirements`**: Whether tools to pin requirements files with
+  `pip-tools` should be included (`y`) or not (`n`). Defaults to `y`. 
+  This is only used if `python_package` is set to `y`.
+- **`circle_ci_config`**: Whether a Circle CI YAML configuration file should be
   generated or not, and what workflow should have. There are 3 options here:
   1. `trunk`: Generate CircleCI configuration, with "trunk branch" development
   mode. Your Git PRs are merged into `develop` branch and then deployed to

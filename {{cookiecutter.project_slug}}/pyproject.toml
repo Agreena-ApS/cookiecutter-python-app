@@ -1,3 +1,9 @@
+{%- if cookiecutter.python_package == 'y' -%}
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+{% endif -%}
 [tool.black]
 line-length = 100
 target-version = ['py311']

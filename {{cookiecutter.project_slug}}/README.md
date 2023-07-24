@@ -61,9 +61,31 @@ python {{cookiecutter.app_name}}/main.py
 
 ```bash
 export PYTHONPATH="{$PYTHONPATH}:/absolute/path/to/{{cookiecutter.project_slug}}"
-```   
+```
 
+{% if cookiecutter.python_package == 'y' -%}
+### Package Installation
 
+The application can be installed as a package with `pip`. 
+
+```bash
+pip install .
+```
+
+This will allow the module to be imported directly in a Python environment:
+
+```python
+import {{ cookiecutter.app_name }}
+```
+
+To install the package in development mode, which will include the development 
+requirements and modify the installation as files are changed, run:
+
+```bash
+pip install -e .[dev]
+```
+
+{% endif -%}
 ## Contributing
 
 Before starting to contribute to {{cookiecutter.project_name}}, please install `pre-commit` to make
@@ -75,3 +97,33 @@ sure your changes get checked for style and standards before committing them to 
 If you are running the Docker setup, please install it with `pip` in your host machine:
 
     $ pip install pre-commit
+
+{% if cookiecutter.python_package == 'y' and cookiecutter.freeze_requirements == 'y' -%}
+### Adding new Python packages
+
+This project uses [pip-tools](https://pip-tools.readthedocs.io/en/latest/) to maintain the tree of
+dependencies. Please make sure you install the `pip-tools` package before proceeding.
+
+If you need to add any new Python package to the project, both for production codebase or for tests,
+you must proceed as follows:
+
+1. Specify your package in the `setup.cfg` file. Should the package be only used in local developer
+   environment (this includes CI environments), please add it to the `[options.extras_require]`
+   under the `dev` section.
+2. Once you are done with this, trigger the next command so the dependencies tree is resolved:
+   ```bash
+   pip-compile --output-file=requirements/base.txt setup.cfg
+   ```
+   Or, in case the dependency belongs to development/test environments:
+   ```bash
+   pip-compile --extra=dev --output-file=requirements/development.txt setup.cfg
+   ```
+3. You can now install your package locally, by triggering the command:
+   ```bash
+   pip-sync requirements/development.txt
+   ```
+4. :warning: Commit **all** the files you have modified.
+
+In order to **update** existing dependencies to newer versions, please consult the pip-tools
+[documentation](https://pip-tools.readthedocs.io/en/latest/#updating-requirements).
+{% endif %}
