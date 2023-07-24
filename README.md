@@ -89,6 +89,10 @@ is a reference of them:
   `image_analysis`.
 - **`project_short_description`**: Brief description of what is the purpose of
   the application.
+- **`agreena_gh_team`**: The name of the Github team that will own the repository.
+  This sets up a `CODEOWNERS` file which sets the given team as the default 
+  reviewers. They must be given relevant permissions over the repository.
+  The team will be appended to `@Agreena-ApS/`.
 - **`settings_management`**: Wheter a Pydantic settings management class should
   be generated (`y`) or not (`n`) as part of the Python codebase bootstrap.
   Defaults to `y`.
