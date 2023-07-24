@@ -45,7 +45,7 @@ jobs:
           pkg-manager: pip
           pip-dependency-file: requirements/development.txt
       - run:
-          command: black --line-length=100 --check .
+          command: black --check .
           name: Run Black code formatting tool
       - run:
           {% if cookiecutter.code_qa == 'pylint' -%}
@@ -53,7 +53,11 @@ jobs:
           name: Run Pylint code QA checks
           {% elif cookiecutter.code_qa == 'flake8' -%}
           command: flake8 {{cookiecutter.app_name}}/ tests/
-          name: Run Flake8 code QA checks{% endif %}
+          name: Run Flake8 code QA checks
+          {% elif cookiecutter.code_qa == 'ruff' -%}
+          command: ruff check .
+          name: Run Ruff code QA checks
+          {%- endif %}
       - run:
           command: mypy {{cookiecutter.app_name}}/
           name: Run Mypy typing hint checks
@@ -65,13 +69,16 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
           pip-dependency-file: requirements/development.txt
-      - run: pytest --verbose --durations=10
+      - run: |
+            pytest \
+              --verbose \
+              --junitxml=test-results/junit.xml \
+              --cov=user_management \
+              --cov-report=html:coverage-results/coverage.html
       - store_test_results:
-          path: results
-      - store_test_results:
-          path: results
+          path: test-results
       - store_artifacts:
-          path: $HOME/test-results/coverage.html
+          path: coverage-results/coverage.html
           destination: coverage-metrics
 
   push-docker-image:

@@ -32,9 +32,9 @@ for the project, by default:
   them.
 - Basic [pip requirements files](https://pip.pypa.io/en/latest/user_guide/#requirements-files)
   inside a `requirements` directory.
-- Configuration for for a Code QA / linter tool, which can be chosen by the 
-  user. [Pylint](https://pylint.org/) and [Flake8](https://flake8.pycqa.org/en/latest/)
-  are the ones currently supported.
+- Configuration for a Code QA / linter tool, which can be chosen by the 
+  user. [Pylint](https://pylint.org/), [Flake8](https://flake8.pycqa.org/en/latest/),
+  and [Ruff](https://beta.ruff.rs/docs/) are the ones currently supported.
 - [Mypy](http://mypy-lang.org/) configuration file, to help on static type 
   checking.
 - [pre-commit](https://pre-commit.com/) configuration file, to perform all
@@ -108,4 +108,4 @@ is a reference of them:
   deployments are done from there.
   3. `none`: Don't generate CircleCI configuration at all.
 - **`code_qa`**: The code QA / linter tool to be used in the project. There are
-  currently 2 choices: `pylint` and `flake8`. Defaults to `pylint`.
+  currently 3 choices: `pylint`, `flake8`, and `ruff`. Defaults to `pylint`.
