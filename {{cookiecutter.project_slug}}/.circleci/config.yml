@@ -45,7 +45,7 @@ jobs:
           pkg-manager: pip
           pip-dependency-file: requirements/development.txt
       - run:
-          command: black --line-length=100 --check .
+          command: black --check .
           name: Run Black code formatting tool
       - run:
           {% if cookiecutter.code_qa == 'pylint' -%}
