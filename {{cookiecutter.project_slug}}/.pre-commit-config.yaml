@@ -5,7 +5,7 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-{%- if cookiecutter.code_qa == 'ruff' }%
+{%- if cookiecutter.code_qa == 'ruff' %}
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.0.278
     hooks:
@@ -21,12 +21,12 @@ repos:
     hooks:
       - id: mypy
         args: [--ignore-missing-imports]
-{%- if cookiecutter.code_qa == 'flake8' }%
+{%- if cookiecutter.code_qa == 'flake8' %}
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
     hooks:
       - id: flake8
-{%- elif cookiecutter.code_qa == 'pylint' }%
+{%- elif cookiecutter.code_qa == 'pylint' %}
   - repo: local
     hooks:
       - id: pylint
