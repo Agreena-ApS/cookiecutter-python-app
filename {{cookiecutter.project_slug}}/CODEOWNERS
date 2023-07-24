@@ -1,2 +1,2 @@
 # Set this team as global PR reviewers
-@Agreena-ApS/{{cookiecutter.agreena_gh_team}}
+* @Agreena-ApS/{{cookiecutter.agreena_gh_team}}
