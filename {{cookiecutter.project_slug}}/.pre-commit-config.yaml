@@ -34,4 +34,8 @@ repos:
         entry: pylint
         language: system
         types: [python]
-{% endif %}
+{%- endif %}
+  - repo: https://github.com/AleksaC/circleci-cli-py
+    rev: v0.1.27660
+    hooks:
+      - id: circle-ci-validator
