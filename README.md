@@ -30,8 +30,8 @@ for the project, by default:
 - A default [pytest](https://docs.pytest.org/en/latest/) `conftest.py` fixtures
   file that helps to override base settings, in case the user opted to have 
   them.
-- Basic [pip requirements files](https://pip.pypa.io/en/latest/user_guide/#requirements-files)
-  inside a `requirements` directory.
+- Basic [frozen pip requirements files](https://pip.pypa.io/en/latest/user_guide/#requirements-files)
+  inside a `requirements` directory and a method for generating these with [pip-tools](https://pip-tools.readthedocs.io/en/latest/).
 - Configuration for a Code QA / linter tool, which can be chosen by the 
   user. [Pylint](https://pylint.org/), [Flake8](https://flake8.pycqa.org/en/latest/),
   and [Ruff](https://beta.ruff.rs/docs/) are the ones currently supported.
