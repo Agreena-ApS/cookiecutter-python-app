@@ -69,13 +69,16 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
           pip-dependency-file: requirements/development.txt
-      - run: pytest --verbose --durations=10
+      - run: |
+            pytest \
+              --verbose \
+              --junitxml=test-results/junit.xml \
+              --cov=user_management \
+              --cov-report=html:coverage-results/coverage.html
       - store_test_results:
-          path: results
-      - store_test_results:
-          path: results
+          path: test-results
       - store_artifacts:
-          path: $HOME/test-results/coverage.html
+          path: coverage-results/coverage.html
           destination: coverage-metrics
 
   push-docker-image:
