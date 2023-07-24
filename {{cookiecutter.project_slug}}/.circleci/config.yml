@@ -51,13 +51,13 @@ jobs:
           {% if cookiecutter.code_qa == 'pylint' -%}
           command: pylint {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc
           name: Run Pylint code QA checks
-          {% elif cookiecutter.code_qa == 'flake8' -%}
+          {%- elif cookiecutter.code_qa == 'flake8' -%}
           command: flake8 {{cookiecutter.app_name}}/ tests/
           name: Run Flake8 code QA checks
-          {% elif cookiecutter.code_qa == 'ruff' -%}
+          {%- elif cookiecutter.code_qa == 'ruff' -%}
           command: ruff check .
           name: Run Ruff code QA checks
-          {%- endif %}
+      {%- endif %}
       - run:
           command: mypy {{cookiecutter.app_name}}/
           name: Run Mypy typing hint checks
