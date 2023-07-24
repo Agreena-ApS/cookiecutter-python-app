@@ -1,0 +1,5 @@
+{% if cookiecutter.code_qa == 'ruff' -%}
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+{% endif %}

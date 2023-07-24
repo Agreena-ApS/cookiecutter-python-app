@@ -7,5 +7,5 @@
     "logging_config": "y",
     "docker_enabled": "y",
     "circle_ci_config": ["trunk", "CI-CD", "none"],
-    "code_qa": ["pylint", "flake8"]
+    "code_qa": ["pylint", "flake8", "ruff"]
 }

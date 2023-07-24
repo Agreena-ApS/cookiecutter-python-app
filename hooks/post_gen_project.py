@@ -21,7 +21,9 @@ class Settings:
 
         # Select for deletion those configs NOT selected by the user.
         self.linters = [
-            config for linter, config in linters_config.items() if linter != self.code_qa
+            config
+            for linter, config in linters_config.items()
+            if linter != self.code_qa
         ]
 
 
@@ -34,9 +36,15 @@ def check_settings(settings: Settings) -> None:
     """
     if settings.settings_management is False:
         os.remove(
-            os.path.join(os.getcwd(), '{{cookiecutter.app_name}}', 'core', 'config', 'settings.py')
+            os.path.join(
+                os.getcwd(),
+                "{{cookiecutter.app_name}}",
+                "core",
+                "config",
+                "settings.py",
+            )
         )
-        os.remove(os.path.join(os.getcwd(), 'tests', 'conftest.py'))
+        os.remove(os.path.join(os.getcwd(), "tests", "conftest.py"))
 
 
 def check_logging(settings: Settings) -> None:
@@ -47,7 +55,9 @@ def check_logging(settings: Settings) -> None:
     """
     if settings.logging_config is False:
         os.remove(
-            os.path.join(os.getcwd(), '{{cookiecutter.app_name}}', 'core', 'config', 'logging.py')
+            os.path.join(
+                os.getcwd(), "{{cookiecutter.app_name}}", "core", "config", "logging.py"
+            )
         )
 
 
@@ -57,7 +67,7 @@ def check_core_module(settings: Settings) -> None:
     declined, generating a project `core` module does not make any sense.
     """
     if settings.settings_management is False and settings.logging_config is False:
-        shutil.rmtree(os.path.join(os.getcwd(), '{{cookiecutter.app_name}}', 'core'))
+        shutil.rmtree(os.path.join(os.getcwd(), "{{cookiecutter.app_name}}", "core"))
 
 
 def check_docker(settings: Settings) -> None:
@@ -67,8 +77,8 @@ def check_docker(settings: Settings) -> None:
     needed in CI/CD workflow.
     """
     if settings.docker_enabled is False and settings.circle_ci_config != "none":
-        os.remove(os.path.join(os.getcwd(), 'Dockerfile'))
-        os.remove(os.path.join(os.getcwd(), '.dockerignore'))
+        os.remove(os.path.join(os.getcwd(), "Dockerfile"))
+        os.remove(os.path.join(os.getcwd(), ".dockerignore"))
 
 
 def check_circleci(settings: Settings) -> None:
@@ -77,7 +87,7 @@ def check_circleci(settings: Settings) -> None:
     configuration.
     """
     if settings.circle_ci_config == "none":
-        shutil.rmtree(os.path.join(os.getcwd(), '.circleci'))
+        shutil.rmtree(os.path.join(os.getcwd(), ".circleci"))
 
 
 def check_code_qa(settings: Settings) -> None:
@@ -92,11 +102,11 @@ def check_code_qa(settings: Settings) -> None:
 if __name__ == "__main__":
     # Instantiate Settings based on user choices.
     settings = Settings(
-        settings_management='{{cookiecutter.settings_management}}' == 'y',
-        logging_config='{{cookiecutter.logging_config}}' == 'y',
-        docker_enabled='{{cookiecutter.docker_enabled}}' == 'y',
-        circle_ci_config='{{cookiecutter.circle_ci_config}}',
-        code_qa="{{cookiecutter.code_qa}}"
+        settings_management="{{cookiecutter.settings_management}}" == "y",
+        logging_config="{{cookiecutter.logging_config}}" == "y",
+        docker_enabled="{{cookiecutter.docker_enabled}}" == "y",
+        circle_ci_config="{{cookiecutter.circle_ci_config}}",
+        code_qa="{{cookiecutter.code_qa}}",
     )
 
     check_settings(settings)
