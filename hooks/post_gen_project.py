@@ -44,7 +44,6 @@ def check_settings(settings: Settings) -> None:
                 "settings.py",
             )
         )
-        os.remove(os.path.join(os.getcwd(), "tests", "conftest.py"))
 
 
 def check_logging(settings: Settings) -> None:
