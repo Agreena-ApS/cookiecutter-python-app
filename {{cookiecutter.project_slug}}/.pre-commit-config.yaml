@@ -35,7 +35,9 @@ repos:
         language: system
         types: [python]
 {%- endif %}
+{%- if cookiecutter.circle_ci_config != 'none' %}
   - repo: https://github.com/AleksaC/circleci-cli-py
     rev: v0.1.27660
     hooks:
       - id: circle-ci-validator
+{% endif %}
