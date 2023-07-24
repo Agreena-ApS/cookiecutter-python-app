@@ -9,6 +9,7 @@ class Settings:
     settings_management: bool
     logging_config: bool
     docker_enabled: bool
+    python_package: bool
     circle_ci_config: str
     code_qa: str
     linters: List[str] = field(init=False, default_factory=list)
@@ -69,6 +70,16 @@ def check_core_module(settings: Settings) -> None:
         shutil.rmtree(os.path.join(os.getcwd(), "{{cookiecutter.app_name}}", "core"))
 
 
+def check_python_package_files(settings: Settings) -> None:
+    """
+    Opting to not produce a Python installable package will dismiss the
+    creation of package metadata files.
+    This also affects files relating to `pip-tools` freezing requirements.
+    """
+    if settings.logging_config is False:
+        os.remove(os.path.join(os.getcwd(), "setup.cfg"))
+
+
 def check_docker(settings: Settings) -> None:
     """
     `docker_enabled` creates `Dockerfile` and `.dockerignore`. Disabling it
@@ -104,6 +115,7 @@ if __name__ == "__main__":
         settings_management="{{cookiecutter.settings_management}}" == "y",
         logging_config="{{cookiecutter.logging_config}}" == "y",
         docker_enabled="{{cookiecutter.docker_enabled}}" == "y",
+        python_package="{{cookiecutter.python_package}}" == "y",
         circle_ci_config="{{cookiecutter.circle_ci_config}}",
         code_qa="{{cookiecutter.code_qa}}",
     )
