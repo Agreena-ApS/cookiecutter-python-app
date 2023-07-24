@@ -3,6 +3,7 @@
     "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
     "app_name": "{{ cookiecutter.project_slug.replace('service', '').replace('hb', '').lstrip('-').rstrip('-').replace('-', '_') }}",
     "project_short_description": "Please add a short description of the Python app...",
+    "agreena_gh_team": "data-engineering",
     "settings_management": "y",
     "logging_config": "y",
     "docker_enabled": "y",
