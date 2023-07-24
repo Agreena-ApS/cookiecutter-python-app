@@ -76,7 +76,7 @@ def check_python_package_files(settings: Settings) -> None:
     creation of package metadata files.
     This also affects files relating to `pip-tools` freezing requirements.
     """
-    if settings.logging_config is False:
+    if settings.python_package is False:
         os.remove(os.path.join(os.getcwd(), "setup.cfg"))
 
 
@@ -126,3 +126,4 @@ if __name__ == "__main__":
     check_docker(settings)
     check_circleci(settings)
     check_code_qa(settings)
+    check_python_package_files(settings)
