@@ -14,3 +14,7 @@ include = '\.pyi?$'
 line-length = 100
 target-version = "py311"
 {% endif %}
+
+[tool.pytest]
+log_cli = true
+log_cli_level = "info"
