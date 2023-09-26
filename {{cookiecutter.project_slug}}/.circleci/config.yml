@@ -73,7 +73,7 @@ jobs:
             pytest \
               --verbose \
               --junitxml=test-results/junit.xml \
-              --cov=user_management \
+              --cov={{cookiecutter.app_name}} \
               --cov-report=html:coverage-results/coverage.html
       - store_test_results:
           path: test-results
