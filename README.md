@@ -94,10 +94,12 @@ is a reference of them:
   `image_analysis`.
 - **`project_short_description`**: Brief description of what is the purpose of
   the application.
-- **`agreena_gh_team`**: The name of the Github team that will own the repository.
-  This sets up a `CODEOWNERS` file which sets the given team as the default 
-  reviewers. They must be given relevant permissions over the repository.
-  The team will be appended to `@Agreena-ApS/`.
+- **`github_codeowners`**: A list of GitHub users that will own the repository.
+  This sets up a `CODEOWNERS` file which sets the given users or teams as the 
+  default reviewers. They must be given relevant permissions over the 
+  repository.
+  Defaults to `Agreena-ApS/data-engineering` GitHub team. If you wish to change
+  it, please add the GH users or team names separated by commas (`,`).
 - **`python_package`**: Whether to include Python packaging metadata files (`y`)
   or not (`n`). This will allow the application to be installed as a Python 
   package with `pip`. Defaults to `y`. 
