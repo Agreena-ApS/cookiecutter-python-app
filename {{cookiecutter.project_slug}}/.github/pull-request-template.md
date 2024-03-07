@@ -1,10 +1,21 @@
 ## Description
 
+Jira ticket: [JIRA-](https://agreena-aps.atlassian.net/browse/JIRA-)
+
 <!-- Summary of the changes and the related issue. -->
 
-Jira ticket : [PROJ-](https://agreena-aps.atlassian.net/browse/<PROJ>-)
+### Type of change:
+<!-- Check all that apply -->
 
-## How Has This Been Tested?
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Documentation update
+- [ ] Refactoring
+- [ ] Miscellaneous/chore
+
+
+## How has this been tested?
 
 <!-- Remove this section if tests are not relevant. For example, for a documentation change.
 
@@ -15,4 +26,5 @@ Please also list any relevant details for your test configuration
 
 ## Checklist:
 
-- [ ] Relevant README documentation has been updated
+- [ ] Relevant README/documentation has been updated
+- [ ] Automated tests added or updated
