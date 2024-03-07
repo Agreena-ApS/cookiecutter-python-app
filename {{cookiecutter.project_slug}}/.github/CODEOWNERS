@@ -1,2 +1,2 @@
-# Set this team as global PR reviewers
-* @Agreena-ApS/{{cookiecutter.agreena_gh_team}}
+{% for owner in cookiecutter.github_codeowners.split(',') %}* @{{ owner }}
+{% endfor %}
