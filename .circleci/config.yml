@@ -1,0 +1,11 @@
+version: 2.1
+
+orbs:
+  python: agreena-aps/python@2.4.0
+
+workflows:
+  main:
+    jobs:
+      - python/test:
+          pkg-manager: pip
+          pip-dependency-file: requirements/development.txt
