@@ -2,7 +2,7 @@ version: 2.1
 
 
 orbs:
-  python: circleci/python@2.1.1
+  python: agreena-aps/python@2.4.0
 
 
 executors:
@@ -36,50 +36,6 @@ jobs:
       DOCKER_BUILDKIT: 1
       GIT_COMMIT: $CIRCLE_SHA1
 
-  code-qa:
-    executor: tests-runner
-    steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: pip
-          pip-dependency-file: requirements/development.txt
-      - run:
-          command: black --check .
-          name: Run Black code formatting tool
-      - run:
-          {% if cookiecutter.code_qa == 'pylint' -%}
-          command: pylint {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc
-          name: Run Pylint code QA checks
-          {%- elif cookiecutter.code_qa == 'flake8' -%}
-          command: flake8 {{cookiecutter.app_name}}/ tests/
-          name: Run Flake8 code QA checks
-          {%- elif cookiecutter.code_qa == 'ruff' -%}
-          command: ruff check .
-          name: Run Ruff code QA checks
-      {%- endif %}
-      - run:
-          command: mypy {{cookiecutter.app_name}}/
-          name: Run Mypy typing hint checks
-
-  test:
-    executor: tests-runner
-    steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: pip
-          pip-dependency-file: requirements/development.txt
-      - run: |
-            pytest \
-              --verbose \
-              --junitxml=test-results/junit.xml \
-              --cov={{cookiecutter.app_name}} \
-              --cov-report=html:coverage-results/coverage.html
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: coverage-results/coverage.html
-          destination: coverage-metrics
-
   push-docker-image:
     executor: docker-publisher
     environment:
@@ -112,12 +68,32 @@ workflows:
   main:
     jobs:
       - build
-      - code-qa:
-          requires:
-            - build
-      - test:
-          requires:
-            - build
+      - python/code-qa:
+          name: code-qa
+          executor: tests-runner
+          pkg-manager: pip
+          pip-dependency-file: requirements/development.txt
+          black-args: "."
+          {% if cookiecutter.code_qa == 'pylint' -%}
+          pylint-args: {{cookiecutter.app_name}}/ tests/ --rcfile=.pylintrc
+          {%- elif cookiecutter.code_qa == 'flake8' -%}
+          pylint-enabled: false
+          flake8-enabled: true
+          flake8-args: {{cookiecutter.app_name}}/ tests/
+          {%- elif cookiecutter.code_qa == 'ruff' -%}
+          pylint-enabled: false
+          ruff-enabled: true
+          ruff-args: "."
+          {%- endif %}
+          mypy-args: {{cookiecutter.app_name}}/
+      - python/test:
+          name: test
+          executor: tests-runner
+          pip-dependency-file: requirements/development.txt
+          cov: {{cookiecutter.app_name}}
+          test-tool-args: |
+            --verbose \
+            --block-network
 
       # Staging
       - push-docker-image:
