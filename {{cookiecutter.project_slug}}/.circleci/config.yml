@@ -89,11 +89,11 @@ workflows:
       - python/test:
           name: test
           executor: tests-runner
+          pkg-manager: pip
           pip-dependency-file: requirements/development.txt
           cov: {{cookiecutter.app_name}}
           test-tool-args: |
-            --verbose \
-            --block-network
+            --verbose
 
       # Staging
       - push-docker-image:
