@@ -95,6 +95,29 @@ workflows:
           test-tool-args: |
             --verbose
 
+      {% if cookiecutter.circle_ci_config == "airflow-task" %}
+      # Staging
+      - hold:
+          name: hold-staging
+          type: approval
+          requires:
+            - code-qa
+            - test
+            - build
+          filters:
+            branches:
+              ignore: main
+      - push-docker-image:
+          name: push-docker-image-staging
+          env: staging
+          requires:
+            - hold-staging
+          context:
+            - gcp-secrets
+          filters:
+            branches:
+              ignore: main
+      {% else %}
       # Staging
       - push-docker-image:
           name: push-docker-image-staging
@@ -108,9 +131,11 @@ workflows:
           filters:
             branches:
               only: {% if cookiecutter.circle_ci_config == "trunk" %}develop{% elif cookiecutter.circle_ci_config == "CI-CD" %}main{% endif %}
+      {% endif %}
 
       # Production
-      - hold-production:
+      - hold:
+          name: hold-production
           type: approval
           requires:
             - code-qa
