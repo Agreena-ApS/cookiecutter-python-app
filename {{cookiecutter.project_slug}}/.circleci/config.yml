@@ -102,6 +102,7 @@ workflows:
           requires:
             - code-qa
             - test
+            - build
           context:
             - gcp-secrets
           filters:
@@ -109,11 +110,12 @@ workflows:
               only: {% if cookiecutter.circle_ci_config == "trunk" %}develop{% elif cookiecutter.circle_ci_config == "CI-CD" %}main{% endif %}
 
       # Production
-      - hold:
+      - hold-production:
           type: approval
           requires:
             - code-qa
             - test
+            - build
           filters:
             branches:
               only: main
@@ -121,7 +123,7 @@ workflows:
           name: push-docker-image-prod
           env: prod
           requires:
-            - hold
+            - hold-production
           context:
             - gcp-secrets
           filters:
