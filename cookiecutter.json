@@ -9,6 +9,6 @@
     "logging_config": "y",
     "docker_enabled": "y",
     "freeze_requirements": "y",
-    "circle_ci_config": ["trunk", "CI-CD", "none"],
+    "circle_ci_config": ["trunk", "CI-CD", "airflow-task", "none"],
     "code_qa": ["pylint", "flake8", "ruff"]
 }

@@ -10,7 +10,7 @@ executors:
     docker:
       - image: cimg/python:3.10
     environment:
-      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/platform/{{cookiecutter.project_slug}}
+      IMAGE_NAME: eu.gcr.io/hummingbird-technologies/{%- if cookiecutter.circle_ci_config == "airflow-task" -%}tasks{%- else -%}platform{%- endif -%}/{{cookiecutter.project_slug}}
     resource_class: small
 
   tests-runner:
@@ -94,7 +94,29 @@ workflows:
           cov: {{cookiecutter.app_name}}
           test-tool-args: |
             --verbose
-
+      {% if cookiecutter.circle_ci_config == "airflow-task" %}
+      # Staging
+      - hold:
+          name: hold-staging
+          type: approval
+          requires:
+            - code-qa
+            - test
+            - build
+          filters:
+            branches:
+              ignore: main
+      - push-docker-image:
+          name: push-docker-image-staging
+          env: staging
+          requires:
+            - hold-staging
+          context:
+            - gcp-secrets
+          filters:
+            branches:
+              ignore: main
+      {% else %}
       # Staging
       - push-docker-image:
           name: push-docker-image-staging
@@ -102,18 +124,21 @@ workflows:
           requires:
             - code-qa
             - test
+            - build
           context:
             - gcp-secrets
           filters:
             branches:
               only: {% if cookiecutter.circle_ci_config == "trunk" %}develop{% elif cookiecutter.circle_ci_config == "CI-CD" %}main{% endif %}
-
+      {% endif %}
       # Production
       - hold:
+          name: hold-production
           type: approval
           requires:
             - code-qa
             - test
+            - build
           filters:
             branches:
               only: main
@@ -121,7 +146,7 @@ workflows:
           name: push-docker-image-prod
           env: prod
           requires:
-            - hold
+            - hold-production
           context:
             - gcp-secrets
           filters:
