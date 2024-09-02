@@ -1,6 +1,6 @@
 {%- if cookiecutter.python_package == 'y' -%}
 [build-system]
-requires = ["setuptools>=42"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 {% endif -%}
