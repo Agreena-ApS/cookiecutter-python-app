@@ -1,3 +1,8 @@
+> [!CAUTION]
+> **This template is discontinued and is not in use any more at Agreena.**
+>
+> If you want to start a new Python project, please use the new [Data Team Python project template](https://github.com/Agreena-ApS/data-python-project-template).
+
 # Cookiecutter Python App
 
 Basic template for Python applications at Agreena, using
